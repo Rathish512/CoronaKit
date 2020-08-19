@@ -7,6 +7,11 @@ public class CoronaKit {
 	private String description;
 	private Double cost;
 	
+	public CoronaKit()
+	{
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}
