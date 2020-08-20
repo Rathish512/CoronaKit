@@ -23,12 +23,12 @@ public class CoronaKitServiceImpl implements CoronaKitService{
 	
 	private boolean isValidName(String name)
 	{
-		return name!=null && (name.length()>3 && name.length()<10);
+		return name!=null && (name.length()>3 && name.length()<15);
 	}
 	
 	private boolean isValidDescription(String description)
 	{
-		return description!=null && (description.length()>3 && description.length()<50);
+		return description!=null && (description.length()>3 && description.length()<500);
 	}
 	
 	private boolean isValidCost(Double cost)
@@ -50,12 +50,12 @@ public class CoronaKitServiceImpl implements CoronaKitService{
 			if(!isValidName(coronaKit.getName()))
 			{
 				isValid=false;
-				errMsgs.add("Name must be 3 to 10 characters in length");
+				errMsgs.add("Name must be 3 to 15 characters in length");
 			}
 			if(!isValidDescription(coronaKit.getDescription()))
 			{
 				isValid=false;
-				errMsgs.add("Description must be 3 to 50 characters in length");
+				errMsgs.add("Description must be 3 to 500 characters in length");
 			}
 			if(!isValidCost(coronaKit.getCost()))
 			{
