@@ -1,12 +1,13 @@
 <header>
-	<h1>Acquire Corona Prevention Kit</h1>
+	<h1>Welcome Admin!</h1>
+	<h2>Please review the items list and add if anything required!</h2>
 	<hr />
 	<nav>
-		<a href="index.jsp">Home</a>
-		<span>|</span>
 		<a href="list">Items List</a>
 		<span>|</span>
-		<a href="newItem">New Item</a>		
+		<a href="newItem">New Item</a>
+		<span>|</span>
+		<a href="index.jsp">Logout</a>			
 	</nav>
 	<hr />
 </header>

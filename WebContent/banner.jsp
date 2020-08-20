@@ -4,7 +4,7 @@
 	<nav>
 		<a href="index.jsp">Home</a>
 		<span>|</span>
-		<a href="header.jsp">Admin</a>
+		<a href="adminLogin.jsp">Admin</a>
 		<span>|</span>
 		<a href="visitor.jsp">Visitor</a>		
 	</nav>
