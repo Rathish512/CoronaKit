@@ -8,7 +8,7 @@
 <title>CoronaKit Order</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="banner.jsp" />
 	
 	<c:if test="${msg != null }">
 		<p><strong>${msg}</strong></p>

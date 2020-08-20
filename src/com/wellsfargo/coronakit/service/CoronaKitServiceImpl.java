@@ -23,7 +23,7 @@ public class CoronaKitServiceImpl implements CoronaKitService{
 	
 	private boolean isValidName(String name)
 	{
-		return name!=null && (name.length()>3 && name.length()<15);
+		return name!=null && (name.length()>3 && name.length()<30);
 	}
 	
 	private boolean isValidDescription(String description)
@@ -50,7 +50,7 @@ public class CoronaKitServiceImpl implements CoronaKitService{
 			if(!isValidName(coronaKit.getName()))
 			{
 				isValid=false;
-				errMsgs.add("Name must be 3 to 15 characters in length");
+				errMsgs.add("Name must be 3 to 30 characters in length");
 			}
 			if(!isValidDescription(coronaKit.getDescription()))
 			{
