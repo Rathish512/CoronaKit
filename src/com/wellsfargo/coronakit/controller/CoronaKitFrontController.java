@@ -13,7 +13,7 @@ import com.wellsfargo.coronakit.exception.CoronaException;
 import com.wellsfargo.coronakit.service.CoronaKitService;
 import com.wellsfargo.coronakit.service.CoronaKitServiceImpl;
 
-@WebServlet({ "/list", "/deleteItem", "/newItem", "/addItem", "/editItem", "/saveItem" })
+@WebServlet({ "/list", "/deleteItem", "/newItem", "/addItem", "/editItem", "/saveItem", "/ShoppingCart", "/addKit"})
 public class CoronaKitFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,6 +51,14 @@ public class CoronaKitFrontController extends HttpServlet {
 			
 		case "/saveItem":
 			view = doCreateOrSaveItem(request,response);
+			break;
+			
+		case "/ShoppingCart":
+			//view = doReviewCart(request,response);
+			break;
+		
+		case "/addKit":
+			view = doAddKit(request,response);
 			break;
 		}
 		
@@ -90,8 +98,8 @@ public class CoronaKitFrontController extends HttpServlet {
 		try
 		{
 			coronaKitService.deleteCoronaKit(coronaKitId);
-			request.setAttribute("Msg", "Item Deleted!");
-			view="index.jsp";
+			request.setAttribute("msg", "Item Deleted!");
+			view="header.jsp";
 		}
 		catch(CoronaException e)
 		{
@@ -108,6 +116,15 @@ public class CoronaKitFrontController extends HttpServlet {
 		request.setAttribute("coronaKit", coronaKit);
 		request.setAttribute("isNew", true);
 		view="newitem.jsp";
+		return view;
+	}
+	
+	private String doAddKit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		String view="";
+		CoronaKit coronaKit = new CoronaKit();
+		request.setAttribute("coronaKit", coronaKit);
+		view="addKit.jsp";
 		return view;
 	}
 	
@@ -131,7 +148,7 @@ public class CoronaKitFrontController extends HttpServlet {
 			}
 			
 			request.setAttribute("msg", "Item is saved");
-			view="index.jsp";
+			view="header.jsp";
 		}
 		catch(CoronaException e)
 		{

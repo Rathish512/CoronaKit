@@ -1,6 +1,7 @@
+<html>
 <header>
 	<h1>Welcome Admin!</h1>
-	<h2>Please review the items list and add if anything required!</h2>
+	<h2>Please review the items list and Add/Edit/Delete accordingly!</h2>
 	<hr />
 	<nav>
 		<a href="list">Items List</a>
@@ -11,3 +12,9 @@
 	</nav>
 	<hr />
 </header>
+<body>
+<c:if test="${msg != null }">
+		<p><strong>${msg}</strong></p>
+	</c:if>
+</body>
+</html>
