@@ -36,17 +36,18 @@ public class addKit extends HttpServlet {
 		
 	response.setContentType("text/html"); 
 	PrintWriter out = response.getWriter(); 
-	String item = request.getParameter("itemNumber"); 
+	//String item = request.getParameter("itemNumber"); 
+	String itemName = request.getParameter("itemName");
 	String quantity = request.getParameter("quantity");
 	String name = request.getParameter("Name");
 	String address = request.getParameter("Address");
 	int Quantity = Integer.parseInt(quantity);
-	int itemNumber = Integer.parseInt(item); 
+	//int itemNumber = Integer.parseInt(item); 
 	try { 
 		Class.forName("com.mysql.jdbc.Driver"); 
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rathishdb", "root", "root"); 
-		PreparedStatement ps = con.prepareStatement("select * from coronakit where id=?"); 
-		ps.setInt(1, itemNumber); 
+		PreparedStatement ps = con.prepareStatement("select * from coronakit where name=?"); 
+		ps.setString(1, itemName); 
 		ResultSet rs = ps.executeQuery();
 		Double totalAmount=0.0;
 		while (rs.next()) { 

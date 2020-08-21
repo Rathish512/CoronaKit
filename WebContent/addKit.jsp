@@ -1,4 +1,6 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+ <%@ page import="java.util.*" %>  
+ <%@ page import="java.io.PrintWriter" %>
  <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -61,8 +63,28 @@ e.printStackTrace();
 <hr/>
 <br>
 <div>
-<label>Enter Item Number:</label>
-<input type = "text"  name = "itemNumber"/>
+<label>Select Item Name</label>
+<Select name = "itemName" required>
+<option>--SELECT--</option>
+<%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql ="select * from coronakit";
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){ 
+%>
+<option><%=resultSet.getString("name")%></option>
+<%
+}
+connection.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+
+
+</Select>
 </div>
 <br>
 <div>
@@ -81,7 +103,7 @@ e.printStackTrace();
 </textarea>
 </div>
 <br>
-<input type = "submit"  name = "save" />
+<input type = "submit" name = "save" />
 </form>
 </body>
 </html>
