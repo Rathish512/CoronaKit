@@ -1,30 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<!DOCTYPE html>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+ <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "rathishdb";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>CoronaKit Order</title>
+<title> CoronaKit Order </title>
 </head>
 <body>
 <jsp:include page="visitor.jsp" />
+<form action ="addKit" method="post">
+
+<h3>List of items that are currently in stock</h3>
+
+	<table border="1" cellspacing="5px" cellpadding="5px">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Cost</th>
+		<th>Item Number</th>
+	</tr>
+	<%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql ="select * from coronakit";
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+%>
+<tr>
+<td><%=resultSet.getString("name") %></td>
+<td><%=resultSet.getString("description") %></td>
+<td><%=resultSet.getString("cost") %></td>
+<td><%=resultSet.getString("id") %></td>
+</tr>
+<%
+}
+connection.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+	</table>
+	<br>
+<hr/>
+<br>
 <div>
-<label>Select Items</label>
-<select name="Select Items" required>
-<option value="">--SELECT--</option>
-<c:forEach items="${'FaceMask,Pocket Sanitizers,Gloves,Oximeter,Vitamin capsules'}" var="opt">
-<option value="${opt}" ${opt.equals(coronaKit.name?'selected':'')}>${opt}
-</option>
-</c:forEach>
-</select>
+<label>Enter Item Number:</label>
+<input type = "text"  name = "itemNumber"/>
 </div>
 <br>
 <div>
-<label>Enter Quantity</label>
-<input type="number" name="quantity" required/>
+<label>Enter Quantity:</label>
+<input type = "number"  name = "quantity"/>
 </div>
 <br>
-<button>SAVE</button>
+<input type = "submit"  name = "save" />
+</form>
 </body>
 </html>

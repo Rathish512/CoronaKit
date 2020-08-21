@@ -102,9 +102,10 @@ public class CoronaKitServiceImpl implements CoronaKitService{
 
 	@Override
 	public CoronaKit getItem(int coronaKitId) throws CoronaException {
+		
 		return coronaKitDao.getById(coronaKitId);
 	}
-	
-	
+
+		
 
 }
