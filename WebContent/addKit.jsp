@@ -67,7 +67,18 @@ e.printStackTrace();
 <br>
 <div>
 <label>Enter Quantity:</label>
-<input type = "number"  name = "quantity"/>
+<input type = "text"  name = "quantity"/>
+</div>
+<br>
+<div>
+<label>Enter Name:</label>
+<input type = "text"  name = "Name"/>
+</div>
+<br>
+<div>
+<label>Enter Address:</label>
+<textarea name = "Address">
+</textarea>
 </div>
 <br>
 <input type = "submit"  name = "save" />

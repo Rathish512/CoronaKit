@@ -6,17 +6,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.wellsfargo.coronakit.entity.CoronaKit;
-import com.wellsfargo.coronakit.service.CoronaKitService;
-import com.wellsfargo.coronakit.service.CoronaKitServiceImpl;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/addKit")
 public class addKit extends HttpServlet {
@@ -35,22 +32,33 @@ public class addKit extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-	
+	HttpSession session = request.getSession();
+		
 	response.setContentType("text/html"); 
 	PrintWriter out = response.getWriter(); 
 	String item = request.getParameter("itemNumber"); 
+	String quantity = request.getParameter("quantity");
+	String name = request.getParameter("Name");
+	String address = request.getParameter("Address");
+	int Quantity = Integer.parseInt(quantity);
 	int itemNumber = Integer.parseInt(item); 
 	try { 
 		Class.forName("com.mysql.jdbc.Driver"); 
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rathishdb", "root", "root"); 
 		PreparedStatement ps = con.prepareStatement("select * from coronakit where id=?"); 
 		ps.setInt(1, itemNumber); 
-		ResultSet rs = ps.executeQuery(); 
+		ResultSet rs = ps.executeQuery();
+		Double totalAmount=0.0;
 		while (rs.next()) { 
-			out.println( 
-					"cost: " + rs.getDouble(3)); 
-			
+			totalAmount= (rs.getDouble(3)*Quantity);
 		}
+		String destination = "ShoppingCart.jsp";
+		
+		session.setAttribute("name",name);
+		session.setAttribute("address", address);
+		session.setAttribute("totalAmount", totalAmount);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
+		requestDispatcher.forward(request, response);
 	}
 	catch (Exception e) { 
 		e.printStackTrace(); 

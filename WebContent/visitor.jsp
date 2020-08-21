@@ -4,8 +4,6 @@
 	<nav>
 		<a href="index.jsp">Home</a>
 		<span>|</span>
-		<a href="ShoppingCart">Shopping Cart</a>
-		<span>|</span>
 		<a href="addKit.jsp">Add Items to Kit</a>		
 	</nav>
 	<hr />
