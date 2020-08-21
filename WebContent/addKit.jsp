@@ -82,8 +82,6 @@ connection.close();
 e.printStackTrace();
 }
 %>
-
-
 </Select>
 </div>
 <br>

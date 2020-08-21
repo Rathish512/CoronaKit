@@ -35,14 +35,12 @@ public class addKit extends HttpServlet {
 	HttpSession session = request.getSession();
 		
 	response.setContentType("text/html"); 
-	PrintWriter out = response.getWriter(); 
-	//String item = request.getParameter("itemNumber"); 
+	PrintWriter out = response.getWriter();  
 	String itemName = request.getParameter("itemName");
 	String quantity = request.getParameter("quantity");
 	String name = request.getParameter("Name");
 	String address = request.getParameter("Address");
-	int Quantity = Integer.parseInt(quantity);
-	//int itemNumber = Integer.parseInt(item); 
+	int Quantity = Integer.parseInt(quantity); 
 	try { 
 		Class.forName("com.mysql.jdbc.Driver"); 
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rathishdb", "root", "root"); 
